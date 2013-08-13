@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "bouncer/macros.html" as m %}
+{% block title %}Change Email{% endblock %}
+{% block content %}
+<h3>Change Email</h3>
+<form class="form-horizontal" method="POST">
+  {{ form.hidden_tag() }}
+  {{ m.render_field(form.email, 'Email') }}
+  {{ m.render_field(form.password, 'Password') }}
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Change Email</button> <a class="btn" href="{{ url_for('.login') }}">Cancel</a>
+    </div>
+  </div>
+</form>
+{% endblock %}
+

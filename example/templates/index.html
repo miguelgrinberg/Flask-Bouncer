@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not current_user.is_authenticated() %}
+<p>Hi, visitor. You are not logged in.</p>
+<p><a href="{{ url_for('bouncer.login') }}">Login</a></p>
+<p><a href="{{ url_for('loggedin') }}">Visit page for logged in users only</a></p>
+<p><a href="{{ url_for('fresh') }}">Visit page for fresh logged in users only</a></p>
+{% else %}
+<p>Hi, {{current_user.username}}. Your account is {% if not current_user.is_confirmed() %}not {% endif %}confirmed.</p>
+<p><a href="{{ url_for('loggedin') }}">Visit page for logged in users only</a></p>
+<p><a href="{{ url_for('fresh') }}">Visit page for fresh logged in users only</a></p>
+{% if not current_user.is_confirmed() %}
+<p><a href="{{ url_for('bouncer.confirm_request') }}">Resend confirmation email</p>
+{% endif %}
+<p><a href="{{ url_for('bouncer.change_email_request') }}">Change email</p>
+<p><a href="{{ url_for('bouncer.change_password') }}">Change password</p>
+<p><a href="{{ url_for('bouncer.logout') }}">Logout</p>
+{% endif %}
+{% endblock %}
+

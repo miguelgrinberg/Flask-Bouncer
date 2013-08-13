@@ -1,0 +1,4 @@
+include README.md LICENSE
+include flask_bouncer/bouncer/templates/*
+include flask_bouncer/bouncer/templates/bouncer/*
+include flask_bouncer/bouncer/templates/bouncer/mail/*

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% import "bouncer/macros.html" as m %}
+{% block title %}Login{% endblock %}
+{% block style %}
+{{ super() }}
+<style>
+a.button {
+    width: 251px;
+    height:42px;
+    display: inline-block;
+}
+a.button.facebook {
+    background: url('{{ url_for('bouncer.static', filename = 'login-buttons.png') }}') no-repeat -2px -1px;
+}
+a.button.facebook:hover {
+    background: url('{{ url_for('bouncer.static', filename = 'login-buttons.png') }}') no-repeat -2px -44px;
+}
+a.button.facebook:active {
+    background: url('{{ url_for('bouncer.static', filename = 'login-buttons.png') }}') no-repeat -2px -87px;
+}
+a.button.twitter {
+    background: url('{{ url_for('.static', filename = 'login-buttons.png') }}') no-repeat -2px -130px;
+}
+a.button.twitter:hover {
+    background: url('{{ url_for('.static', filename = 'login-buttons.png') }}') no-repeat -2px -173px;
+}
+a.button.twitter:active {
+    background: url('{{ url_for('.static', filename = 'login-buttons.png') }}') no-repeat -2px -216px;
+}
+a.button.google {
+    background: url('{{ url_for('.static', filename = 'login-buttons.png') }}') no-repeat -2px -259px;
+}
+a.button.google:hover {
+    background: url('{{ url_for('.static', filename = 'login-buttons.png') }}') no-repeat -2px -302px;
+}
+a.button.google:active {
+    background: url('{{ url_for('.static', filename = 'login-buttons.png') }}') no-repeat -2px -345px;
+}
+.divider {
+    border-right: 1px solid #ddd;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% if providers %}
+        <div class="span5 divider">
+            <h3>One-click login</h3>
+            {% if providers.get('facebook') %}<p><a class="button facebook" href="{{ url_for('.oauth_login', provider = 'facebook') }}"></a></p>{% endif %}
+            {% if providers.get('twitter') %}<p><a class="button twitter" href="{{ url_for('.oauth_login', provider = 'twitter') }}"></a></p>{% endif %}
+            {% if providers.get('google') %}<p><a class="button google" href="{{ url_for('.oauth_login', provider = 'google') }}"></a></p>{% endif %}
+        </div>
+        {% endif %}
+        <div class="span6">
+            <h3>Login with your account</h3>
+            <form class="form-horizontal" name="login" method="POST">
+                {{ form.hidden_tag() }}
+                {{ m.render_field_compact(form.email, 'Email') }}
+                {{ m.render_field_compact(form.password, 'Password') }}
+                <label class="checkbox">
+                    {{ form.remember_me }} {{ form.remember_me.label }}
+                </label>
+                <p><button type="submit" class="btn btn-primary">Sign in</button></p>
+                <p>or</p>
+                <p><a class="btn btn-success" href="{{ url_for('.register') }}">Create an Account</a></p>
+                <br />
+            </form>
+        </div>
+    </div>
+    <p>Can't remember your account details? <a class="btn btn-danger" href="{{ url_for('.reset_request') }}">Recover your account</a></p>
+</div>
+{% endblock %}

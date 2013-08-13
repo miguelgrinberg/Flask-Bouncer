@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% import "bouncer/macros.html" as m %}
+{% block title %}Create a New Account{% endblock %}
+{% block content %}
+<h3>Create a New Account</h3>
+<form class="form-horizontal" method="POST">
+  {{ form.hidden_tag() }}
+  {{ m.render_field(form.email, 'Email') }}
+  {{ m.render_field(form.username, 'Username') }}
+  {{ m.render_field(form.password, 'Password') }}
+  {{ m.render_field(form.password2) }}
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Register</button> <a class="btn" href="{{ url_for('.login') }}">Cancel</a>
+    </div>
+  </div>
+</form>
+{% endblock %}
+

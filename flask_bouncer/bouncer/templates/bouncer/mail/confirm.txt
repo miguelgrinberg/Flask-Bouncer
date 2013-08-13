@@ -1,0 +1,9 @@
+Dear {{ user.username }},
+
+Welcome! Your account has been created. To verify your email address click on the following link:
+
+{{ url_for('bouncer.confirm', token = token, _external = True) }}
+
+Sincerely,
+
+{{ signature }}
